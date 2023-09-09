@@ -13,5 +13,5 @@ interface ConverterInterface
     /**
      * @throws ConverterExceptionInterface
      */
-    public function convert(ImageInterface $image, PixelFormatInterface $output): ImageInterface;
+    public function convert(ImageInterface $image, PixelFormatInterface $format): ImageInterface;
 }

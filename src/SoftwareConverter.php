@@ -12,13 +12,13 @@ use Bic\Image\PixelFormatInterface;
 
 final class SoftwareConverter implements ConverterInterface
 {
-    public function convert(ImageInterface $image, PixelFormatInterface $output): ImageInterface
+    public function convert(ImageInterface $image, PixelFormatInterface $format): ImageInterface
     {
         if ($image->getCompression() !== Compression::NONE) {
             throw new CompressedImageException('Could not convert compressed image');
         }
 
-        if ($image->getFormat() === $output) {
+        if ($image->getFormat() === $format) {
             return $image;
         }
 
@@ -31,11 +31,11 @@ final class SoftwareConverter implements ConverterInterface
         $ia = $input->getAlphaColor();
         $ip = $input->getBytesPerPixel();
 
-        $or = $output->getRedColor();
-        $og = $output->getGreenColor();
-        $ob = $output->getBlueColor();
-        $oa = $output->getAlphaColor();
-        $op = $output->getBytesPerPixel();
+        $or = $format->getRedColor();
+        $og = $format->getGreenColor();
+        $ob = $format->getBlueColor();
+        $oa = $format->getAlphaColor();
+        $op = $format->getBytesPerPixel();
 
         $source = $image->getData();
         $suffix = \str_repeat("\0", 4 - $ip);
@@ -59,7 +59,7 @@ final class SoftwareConverter implements ConverterInterface
         }
 
         return new Image(
-            format: $output,
+            format: $format,
             width: $image->getWidth(),
             height: $image->getHeight(),
             data: $result,

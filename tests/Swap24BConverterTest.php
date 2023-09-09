@@ -58,7 +58,7 @@ final class Swap24BConverterTest extends TestCase
             $this->assertSame(
                 self::rgba($expected[$i], $expected[$i + 1], $expected[$i + 2]),
                 self::rgba($actual[$i + 2], $actual[$i + 1], $actual[$i]),
-                "Pixel #$number format comparison"
+                \sprintf('Pixel #%d format comparison', $number)
             );
         }
     }
@@ -82,7 +82,7 @@ final class Swap24BConverterTest extends TestCase
             $this->assertSame(
                 self::rgba($expected[$i], $expected[$i + 1], $expected[$i + 2]),
                 self::rgba($actual[$o + 2], $actual[$o + 1], $actual[$o]),
-                "Pixel #$number format comparison",
+                \sprintf('Pixel #%d format comparison', $number),
             );
         }
     }
@@ -106,7 +106,7 @@ final class Swap24BConverterTest extends TestCase
             $this->assertSame(
                 self::rgba($expected[$i], $expected[$i + 1], $expected[$i + 2]),
                 self::rgba($actual[$o + 2], $actual[$o + 1], $actual[$o]),
-                "Pixel #$number format comparison",
+                \sprintf('Pixel #%d format comparison', $number),
             );
         }
     }

@@ -29,7 +29,7 @@ final class Swap24BConverterTest extends TestCase
             format: PixelFormat::B8G8R8,
             width: 16,
             height: 16,
-            contents: \file_get_contents(__DIR__ . '/stubs/24bit.bmp', offset: self::OFFSET_BMP),
+            data: \file_get_contents(__DIR__ . '/stubs/24bit.bmp', offset: self::OFFSET_BMP),
         );
     }
 
@@ -39,17 +39,17 @@ final class Swap24BConverterTest extends TestCase
             format: PixelFormat::B8G8R8A8,
             width: 16,
             height: 16,
-            contents: \file_get_contents(__DIR__ . '/stubs/32bit.bmp', offset: self::OFFSET_BMP),
+            data: \file_get_contents(__DIR__ . '/stubs/32bit.bmp', offset: self::OFFSET_BMP),
         );
     }
 
     public function testBGRtoRGB(): void
     {
         $before = $this->bgr();
-        $expected = $before->getContents();
+        $expected = $before->getData();
 
         $after = $this->converter->convert($before, PixelFormat::R8G8B8);
-        $actual = $after->getContents();
+        $actual = $after->getData();
 
         $this->assertSame($before->getBytes(), $after->getBytes(), 'Image size should not change');
 
@@ -66,10 +66,10 @@ final class Swap24BConverterTest extends TestCase
     public function testBGRAtoRGB(): void
     {
         $before = $this->bgra();
-        $expected = $before->getContents();
+        $expected = $before->getData();
 
         $after = $this->converter->convert($before, PixelFormat::R8G8B8);
-        $actual = $after->getContents();
+        $actual = $after->getData();
 
         $this->assertSame(
             (int)($before->getBytes() / 4 * 3),
@@ -90,10 +90,10 @@ final class Swap24BConverterTest extends TestCase
     public function testBGRtoRGBA(): void
     {
         $before = $this->bgr();
-        $expected = $before->getContents();
+        $expected = $before->getData();
 
         $after = $this->converter->convert($before, PixelFormat::R8G8B8A8);
-        $actual = $after->getContents();
+        $actual = $after->getData();
 
         $this->assertSame(
             $before->getBytes(),

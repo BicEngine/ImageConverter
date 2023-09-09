@@ -37,7 +37,7 @@ final class SoftwareConverter implements ConverterInterface
         $oa = $output->getAlphaColor();
         $op = $output->getBytesPerPixel();
 
-        $source = $image->getContents();
+        $source = $image->getData();
         $suffix = \str_repeat("\0", 4 - $ip);
 
         for ($offset = 0, $length = $image->getBytes(); $offset < $length; $offset += $ip) {
@@ -62,7 +62,7 @@ final class SoftwareConverter implements ConverterInterface
             format: $output,
             width: $image->getWidth(),
             height: $image->getHeight(),
-            contents: $result,
+            data: $result,
         );
     }
 }
